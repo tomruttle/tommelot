@@ -1,7 +1,8 @@
-import { CFP_COOKIE_KEY, Errors } from "@/src/utils/constants";
+import { CFP_COOKIE_KEY } from "@/src/utils/constants";
 import { isString, sha256 } from "@/src/utils/shared";
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { Errors } from "./utils/errors";
 
 export const runtime = 'experimental-edge';
 
@@ -28,8 +29,9 @@ export async function middleware(request: NextRequest): Promise<Response> {
   }
 
   const hashedCfpPassword = await sha256(cfpPassword);
+  const hashedCookiePassword = await sha256(cookiePassword);
 
-  if (cookiePassword === hashedCfpPassword) {
+  if (hashedCookiePassword === hashedCfpPassword) {
     return NextResponse.next();
   }
 
