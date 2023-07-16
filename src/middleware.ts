@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
 
-export const runtime = 'edge';
+export const runtime = 'experimental-edge';
 
 export async function middleware(request: NextRequest): Promise<Response> {
   if (request.nextUrl.pathname === '/api/login') {

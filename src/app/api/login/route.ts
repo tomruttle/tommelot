@@ -3,7 +3,7 @@ import { isString, sha256 } from "@/src/utils/shared";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from 'next/headers';
 
-export const runtime = 'edge';
+export const runtime = 'experimental-edge';
 
 export async function POST(request: NextRequest) {
   const requestUrl = new URL(request.url);
