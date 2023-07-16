@@ -6,5 +6,3 @@ export enum Errors {
 }
 
 export const CFP_COOKIE_KEY = 'CFP-Auth-Key';
-export const CFP_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-export const CFP_ALLOWED_PATHS = ['/cfp_login'];

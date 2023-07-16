@@ -1,4 +1,6 @@
-import { CFP_COOKIE_KEY } from "./constants";
+export function isString(test: unknown): test is string {
+  return typeof test === 'string' && test.length > 0;
+}
 
 export async function sha256(str: string): Promise<string> {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
@@ -8,6 +10,3 @@ export async function sha256(str: string): Promise<string> {
     .join('');
 }
 
-export function getCookie(password: string): string {
-  return `${CFP_COOKIE_KEY}=${password}`;
-}
