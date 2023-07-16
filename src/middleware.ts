@@ -21,6 +21,12 @@ export async function middleware(request: NextRequest): Promise<Response> {
   }
 
   const cookiePassword = request.cookies.get(CFP_COOKIE_KEY)?.value || '';
+
+  if (!isString(cookiePassword)) {
+    requestUrl.searchParams.append('error', Errors.Empty.toString());
+    return NextResponse.redirect(requestUrl);
+  }
+
   const hashedCfpPassword = await sha256(cfpPassword);
 
   if (cookiePassword === hashedCfpPassword) {
