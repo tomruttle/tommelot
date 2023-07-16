@@ -1,6 +1,8 @@
 import { getError } from "../utils/errors"
 import { isString } from "../utils/shared";
 
+export const runtime = 'experimental-edge';
+
 export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   const searchError = searchParams.error;
 
