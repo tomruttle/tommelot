@@ -1,7 +1,6 @@
 import { CFP_COOKIE_KEY, Errors } from "@/src/utils/constants";
 import { isString, sha256 } from "@/src/utils/shared";
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from 'next/headers';
 
 export const runtime = 'experimental-edge';
 
@@ -20,8 +19,9 @@ export async function POST(request: NextRequest) {
   const hashedCfpPassword = await sha256(cfpPassword);
 
   if (hashedPassword === hashedCfpPassword) {
-    cookies().set(CFP_COOKIE_KEY, cfpPassword);
-    return new NextResponse();
+    const response = new NextResponse();
+    response.cookies.set(CFP_COOKIE_KEY, cfpPassword);
+    return response;
   }
 
   requestUrl.searchParams.append('error', Errors.Incorrect.toString());
