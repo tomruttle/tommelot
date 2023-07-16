@@ -7,36 +7,41 @@ import { cookies } from 'next/headers';
 export const runtime = 'experimental-edge';
 
 export async function middleware(request: NextRequest): Promise<Response> {
-  if (request.nextUrl.pathname === '/api/login') {
-    console.log('logging in');
-    return NextResponse.next();
-  }
+  try {
+    if (request.nextUrl.pathname === '/api/login') {
+      console.log('logging in');
+      return NextResponse.next();
+    }
 
-  const requestUrl = new URL(request.url);
+    const requestUrl = new URL(request.url);
 
-  const { error } = Object.fromEntries(requestUrl.searchParams);
-  if (isString(error)) {
-    console.log(`moving on... ${error}`);
-    return NextResponse.next();
-  }
+    const { error } = Object.fromEntries(requestUrl.searchParams);
+    if (isString(error)) {
+      console.log(`moving on... ${error}`);
+      return NextResponse.next();
+    }
 
-  const cfpPassword = process.env.CFP_PASSWORD;
+    const cfpPassword = process.env.CFP_PASSWORD;
 
-  if (!isString(cfpPassword)) {
-    console.log('missing password!', Errors.Missing.toString());
-    requestUrl.searchParams.append('error', Errors.Missing.toString());
+    if (!isString(cfpPassword)) {
+      console.log('missing password?', Errors.Missing.toString());
+      requestUrl.searchParams.append('error', Errors.Missing.toString());
+      return NextResponse.redirect(requestUrl);
+    }
+
+    const cookiePassword = cookies().get(CFP_COOKIE_KEY)?.value || '';
+    const hashedCfpPassword = await sha256(cfpPassword);
+
+    if (cookiePassword === hashedCfpPassword) {
+      console.log('MATCHES!!')
+      return NextResponse.next();
+    }
+
+    console.log('WRONG!');
+    requestUrl.searchParams.append('error', Errors.Incorrect.toString());
     return NextResponse.redirect(requestUrl);
-  }
-
-  const cookiePassword = cookies().get(CFP_COOKIE_KEY)?.value || '';
-  const hashedCfpPassword = await sha256(cfpPassword);
-
-  if (cookiePassword === hashedCfpPassword) {
-    console.log('MATCHES!!')
+  } catch (err) {
+    console.log(err);
     return NextResponse.next();
   }
-
-  console.log('WRONG!');
-  requestUrl.searchParams.append('error', Errors.Incorrect.toString());
-  return NextResponse.redirect(requestUrl);
 }
