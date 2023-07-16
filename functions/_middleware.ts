@@ -4,18 +4,18 @@ import { isString } from "@/utils/shared";
 import { CloudflareFunctionArgs } from "@/utils/types";
 
 export async function onRequest({ request, next, env: { CFP_PASSWORD } }: CloudflareFunctionArgs): Promise<Response> {
-  const url = new URL(request.url);
+  const requestUrl = new URL(request.url);
 
-  const { error } = Object.fromEntries(url.searchParams);
-  if (isString(error) || CFP_ALLOWED_PATHS.includes(url.pathname)) {
+  const { error } = Object.fromEntries(requestUrl.searchParams);
+  if (isString(error) || CFP_ALLOWED_PATHS.includes(requestUrl.pathname)) {
     return next();
   }
 
   const response = new Response('', { status: 302, headers: { 'Cache-Control': 'no-cache' } });
 
   if (!isString(CFP_PASSWORD)) {
-    url.searchParams.append('error', Errors.Missing.toString());
-    response.headers.set('Location', url.toString());
+    requestUrl.searchParams.append('error', Errors.Missing.toString());
+    response.headers.set('Location', requestUrl.toString());
     return response;
   }
 
@@ -29,7 +29,7 @@ export async function onRequest({ request, next, env: { CFP_PASSWORD } }: Cloudf
     }
   }
 
-  url.searchParams.append('error', Errors.Incorrect.toString());
-  response.headers.set('Location', url.toString());
+  requestUrl.searchParams.append('error', Errors.Incorrect.toString());
+  response.headers.set('Location', requestUrl.toString());
   return response;
 }

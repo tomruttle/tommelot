@@ -4,20 +4,20 @@ import { isString } from "@/utils/shared";
 import { CloudflareFunctionArgs } from "@/utils/types";
 
 export async function onRequestPost({ request, env: { CFP_PASSWORD } }: CloudflareFunctionArgs): Promise<Response> {
-  const url = new URL(request.url);
+  const requestUrl = new URL(request.url);
   const body = await request.formData();
   const { password } = Object.fromEntries(body);
   const response = new Response('', { status: 302, headers: { 'Cache-Control': 'no-cache' } });
 
   if (request.method !== "POST") {
-    url.searchParams.append('error', Errors.Invalid.toString());
-    response.headers.set('Location', url.toString());
+    requestUrl.searchParams.append('error', Errors.Invalid.toString());
+    response.headers.set('Location', requestUrl.toString());
     return response;
   }
 
   if (!isString(CFP_PASSWORD)) {
-    url.searchParams.append('error', Errors.Missing.toString());
-    response.headers.set('Location', url.toString());
+    requestUrl.searchParams.append('error', Errors.Missing.toString());
+    response.headers.set('Location', requestUrl.toString());
     return response;
   }
 
@@ -26,11 +26,11 @@ export async function onRequestPost({ request, env: { CFP_PASSWORD } }: Cloudfla
 
   if (hashedPassword === hashedCfpPassword) {
     response.headers.set('Set-Cookie', `${getCookie(CFP_PASSWORD)}; Max-Age=${CFP_COOKIE_MAX_AGE}; Path=/; HttpOnly; Secure`);
-    response.headers.set('Location', url.toString());
+    response.headers.set('Location', requestUrl.toString());
     return response;
   }
 
-  url.searchParams.append('error', Errors.Incorrect.toString());
-  response.headers.set('Location', url.toString());
+  requestUrl.searchParams.append('error', Errors.Incorrect.toString());
+  response.headers.set('Location', requestUrl.toString());
   return response;
 }
