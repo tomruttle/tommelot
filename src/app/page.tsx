@@ -1,20 +1,20 @@
-import { getError } from "../utils/errors"
+import { getState } from "../utils/states"
 import { isString } from "../utils/shared";
 
-export const runtime = 'experimental-edge';
+export const runtime = 'edge';
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-  const searchError = searchParams.error;
+  const searchState = searchParams.state;
 
-  if (!isString(searchError)) {
+  if (!isString(searchState)) {
     return <div>You win!</div>
   }
 
-  const error = getError(searchError);
+  const state = getState(searchState);
 
   return (
     <div>
-        Hello World! {error.toString()}
+        Hello World! {state.toString()}
         <form action="/api/login" method="post">
           <input type="text" name="password"></input>
           <button type="submit">Enter</button>

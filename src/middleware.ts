@@ -2,41 +2,24 @@ import { CFP_COOKIE_KEY } from "@/src/utils/constants";
 import { isString, sha256 } from "@/src/utils/shared";
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { Errors } from "./utils/errors";
+import { getNewState } from "./utils/states";
 
 export const runtime = 'experimental-edge';
 
-export async function middleware(request: NextRequest): Promise<Response> {
-  const requestUrl = new URL(request.url);
+export async function middleware(req: NextRequest): Promise<Response> {
+  const cookiePassword = req.cookies.get(CFP_COOKIE_KEY)?.value || '';
+  const { state } = Object.fromEntries(req.nextUrl.searchParams);
+  const cfpPassword = await sha256(process.env.CFP_PASSWORD || '');
+  
+  const newState = isString(state) ? null : getNewState(cfpPassword, cookiePassword);
 
-  const { error } = Object.fromEntries(requestUrl.searchParams);
-  if (isString(error)) {
-    return NextResponse.next();
+  if (newState) {
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.searchParams.set('state', newState.toString());
+    return NextResponse.redirect(redirectUrl);
   }
 
-  const cfpPassword = process.env.CFP_PASSWORD;
-
-  if (!isString(cfpPassword)) {
-    requestUrl.searchParams.append('error', Errors.Missing.toString());
-    return NextResponse.redirect(requestUrl);
-  }
-
-  const cookiePassword = request.cookies.get(CFP_COOKIE_KEY)?.value || '';
-
-  if (!isString(cookiePassword)) {
-    requestUrl.searchParams.append('error', Errors.Empty.toString());
-    return NextResponse.redirect(requestUrl);
-  }
-
-  const hashedCfpPassword = await sha256(cfpPassword);
-  const hashedCookiePassword = await sha256(cookiePassword);
-
-  if (hashedCookiePassword === hashedCfpPassword) {
-    return NextResponse.next();
-  }
-
-  requestUrl.searchParams.append('error', Errors.Incorrect.toString());
-  return NextResponse.redirect(requestUrl);
+  return NextResponse.next();
 }
 
 export const config = {
