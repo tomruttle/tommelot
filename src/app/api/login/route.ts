@@ -10,11 +10,11 @@ export async function POST(req: NextRequest) {
   const body = await req.formData();
   const { password } = Object.fromEntries(body);
   const cfpPassword = process.env.CFP_PASSWORD || '';
+  const newState = getNewState(cfpPassword, password.toString())
 
   const redirectUrl = req.nextUrl.clone();
   redirectUrl.pathname = '/';
-
-  const newState = getNewState(cfpPassword, password.toString())
+  
   if (newState) {
     redirectUrl.searchParams.set('state', newState);
   } else {
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
   }
   
   const res = NextResponse.redirect(redirectUrl, 303);
+  
   if (newState === null) {
     res.cookies.set(CFP_COOKIE_KEY, await sha256(cfpPassword));
   }
