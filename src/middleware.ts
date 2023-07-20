@@ -9,16 +9,18 @@ export const runtime = 'experimental-edge';
 export async function middleware(req: NextRequest): Promise<Response> {
   const { state } = Object.fromEntries(req.nextUrl.searchParams);
   
-  if (!isString(state)) {
-    const cfpPassword = await sha256(process.env.CFP_PASSWORD || '');
-    const cookiePassword = req.cookies.get(CFP_COOKIE_KEY)?.value || '';
-    const newState = getNewState(cfpPassword, cookiePassword);
-    
-    if (newState) {
-      const redirectUrl = req.nextUrl.clone();
-      redirectUrl.searchParams.set('state', newState.toString());
-      return NextResponse.redirect(redirectUrl);
-    }
+  if (isString(state)) {
+    return NextResponse.next();
+  }
+
+  const cfpPassword = await sha256(process.env.CFP_PASSWORD || '');
+  const cookiePassword = req.cookies.get(CFP_COOKIE_KEY)?.value || '';
+  const newState = getNewState(cfpPassword, cookiePassword);
+  
+  if (newState) {
+    const redirectUrl = req.nextUrl.clone();
+    redirectUrl.searchParams.set('state', newState.toString());
+    return NextResponse.redirect(redirectUrl);
   }
 
   return NextResponse.next();

@@ -3,20 +3,22 @@ import { isString } from "./shared";
 export enum States {
   Missing = 'missing-password',
   Incorrect = 'incorrect-password',
-  Invalid = 'invalid-method',
   Empty = 'empty-password',
   General = 'general'
 }
   
-export function getState(test: string): States {
+export function getState(test: string): string {
   switch (test) {
     case States.Missing.toString(): return States.Missing;
     case States.Incorrect.toString(): return States.Incorrect;
-    case States.Invalid.toString(): return States.Invalid;
     case States.Empty.toString(): return States.Empty;
   }
 
   return States.General;
+}
+
+function formatString(input: string): string {
+  return input.trim().toLocaleLowerCase();
 }
 
 export function getNewState(cfpPassword: string, cookiePassword: string): States | null {
@@ -28,7 +30,7 @@ export function getNewState(cfpPassword: string, cookiePassword: string): States
     return States.Empty;
   }
   
-  if (cookiePassword !== cfpPassword) {
+  if (formatString(cookiePassword) !== formatString(cfpPassword)) {
     return States.Incorrect;
   }
 
