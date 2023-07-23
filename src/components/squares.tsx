@@ -19,13 +19,6 @@ function getSquareTransform(azimuth: number, inclination: number, radius: number
   return `translateX(${x}px) translateY(${y}px) translateZ(${z}px)`
 }
 
-function getTileBackgroundColour(inclination: number) {
-  const isBright = (inclination > 1.3 && inclination < 1.9) || (inclination < -1.3 && inclination > -1.9);
-  const colourValue = isBright ? randomNumber(130, 255) : randomNumber(110, 190);
-
-  return `rgb(${colourValue},${colourValue},${colourValue})`;
-}
-
 export function Squares({ radius, tileSize, prec, reflectSpeed }: { radius: number, tileSize: number, prec: number, reflectSpeed: number }) {
   const squares: Array<JSX.Element> = []
 
@@ -40,9 +33,9 @@ export function Squares({ radius, tileSize, prec, reflectSpeed }: { radius: numb
           radius={radius}
         >
           <Tile
-            transform={`rotate(${azimuth}rad) rotateY(${inclination}rad)`}
             animationDelay={randomNumber(0, 20) / 10}
-            backgroundColor={getTileBackgroundColour(inclination)}
+            inclination={inclination}
+            azimuth={azimuth}
             size={tileSize}
             reflectSpeed={reflectSpeed}
           />
