@@ -8,7 +8,12 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
   const searchState = searchParams.state;
 
   if (isString(searchState)) {
-    return <Login searchState={searchState} />
+    return (
+      <>
+        <DiscoBall />
+        <Login searchState={searchState} />
+      </>
+    );
   }
 
   return (

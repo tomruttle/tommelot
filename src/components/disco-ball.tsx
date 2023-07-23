@@ -4,6 +4,8 @@ export default function DiscoBall() {
   const radius = 100;
   const tileSize = 9;
   const prec = 30;
+  const rotationDuration = 100;
+  const reflectSpeed = 5;
 
   return (
     <div style={{
@@ -26,7 +28,7 @@ export default function DiscoBall() {
       <div
         style={{
           transformStyle: 'preserve-3d',
-          animation: 'rotateDiscoBall 18s linear infinite',
+          animation: `rotateDiscoBall ${rotationDuration}s linear infinite`,
           width: `${2 * radius}px`,
           height: `${2 * radius}px`,
           position: 'absolute',
@@ -39,11 +41,11 @@ export default function DiscoBall() {
             backgroundColor: '#111',
             position: 'absolute',
             background: 'linear-gradient(top, #111, #333)',
-            animation: 'rotateDiscoBallMiddle 18s linear infinite',
+            animation: `rotateDiscoBallMiddle ${rotationDuration}s linear infinite`,
           }}
         ></div>
 
-        <Squares radius={radius} tileSize={tileSize} prec={prec} /></div>
+        <Squares radius={radius} tileSize={tileSize} prec={prec} reflectSpeed={reflectSpeed} /></div>
     </div>
   )
 }

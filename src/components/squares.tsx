@@ -26,7 +26,7 @@ function getTileBackgroundColour(t: number) {
   return `rgb(${colourValue},${colourValue},${colourValue})`;
 }
 
-export function Squares({ radius, tileSize, prec }: { radius: number, tileSize: number, prec: number }) {
+export function Squares({ radius, tileSize, prec, reflectSpeed }: { radius: number, tileSize: number, prec: number, reflectSpeed: number }) {
   const squares: Array<JSX.Element> = []
 
   for (let t = FUZZY; t < Math.PI; t += (Math.PI - FUZZY) / prec) {
@@ -44,6 +44,7 @@ export function Squares({ radius, tileSize, prec }: { radius: number, tileSize: 
             animationDelay={randomNumber(0, 20) / 10}
             backgroundColor={getTileBackgroundColour(t)}
             size={tileSize}
+            reflectSpeed={reflectSpeed}
           />
         </Square>
       ))

@@ -1,4 +1,4 @@
-export function Tile({ transform, animationDelay, backgroundColor, size }: { transform: string, animationDelay: number, backgroundColor: string, size: number }) {
+export function Tile({ transform, animationDelay, backgroundColor, size, reflectSpeed }: { transform: string, animationDelay: number, backgroundColor: string, size: number, reflectSpeed: number }) {
     return (
       <div
         style={{
@@ -7,7 +7,7 @@ export function Tile({ transform, animationDelay, backgroundColor, size }: { tra
           height: `${size}px`,
           transformOrigin: "0 0 0",
           transform,
-          animation: "reflect 2s linear infinite",
+          animation: `reflect ${reflectSpeed}s linear infinite`,
           animationDelay: `${animationDelay}s`,
           backfaceVisibility: "hidden",
         }}
