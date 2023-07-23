@@ -11,9 +11,9 @@ function getAngleIncrement(inclination: number, radius: number, tileSize: number
   return (MAX_ANGLE - FUZZY) / squaresThatFit;
 }
 
-function getSquareTransform(i: number, inclination: number, radius: number) {
-  const x = radius * Math.cos(i) * Math.sin(inclination);
-  const y = radius * Math.sin(i) * Math.sin(inclination);
+function getSquareTransform(azimuth: number, inclination: number, radius: number) {
+  const x = radius * Math.cos(azimuth) * Math.sin(inclination);
+  const y = radius * Math.sin(azimuth) * Math.sin(inclination);
   const z = radius * Math.cos(inclination);
 
   return `translateX(${x}px) translateY(${y}px) translateZ(${z}px)`
@@ -32,15 +32,15 @@ export function Squares({ radius, tileSize, prec, reflectSpeed }: { radius: numb
   for (let inclination = FUZZY; inclination < Math.PI; inclination += (Math.PI - FUZZY) / prec) {
     const angleInc = getAngleIncrement(inclination, radius, tileSize);
 
-    for (let i = (angleInc / 2) + FUZZY; i < MAX_ANGLE; i += angleInc) {
+    for (let azimuth = (angleInc / 2) + FUZZY; azimuth < MAX_ANGLE; azimuth += angleInc) {
       squares.push((
         <Square
-          key={`inc${inclination}i${i}`}
-          transform={getSquareTransform(i, inclination, radius)}
+          key={`inc${inclination}az${azimuth}`}
+          transform={getSquareTransform(azimuth, inclination, radius)}
           radius={radius}
         >
           <Tile
-            transform={`rotate(${i}rad) rotateY(${inclination}rad)`}
+            transform={`rotate(${azimuth}rad) rotateY(${inclination}rad)`}
             animationDelay={randomNumber(0, 20) / 10}
             backgroundColor={getTileBackgroundColour(inclination)}
             size={tileSize}
