@@ -11,14 +11,6 @@ function getAngleIncrement(inclination: number, radius: number, tileSize: number
   return (MAX_ANGLE - FUZZY) / squaresThatFit;
 }
 
-function getSquareTransform(azimuth: number, inclination: number, radius: number) {
-  const x = radius * Math.cos(azimuth) * Math.sin(inclination);
-  const y = radius * Math.sin(azimuth) * Math.sin(inclination);
-  const z = radius * Math.cos(inclination);
-
-  return `translateX(${x}px) translateY(${y}px) translateZ(${z}px)`
-}
-
 export function Squares({ radius, tileSize, prec, reflectSpeed }: { radius: number, tileSize: number, prec: number, reflectSpeed: number }) {
   const squares: Array<JSX.Element> = []
 
@@ -29,7 +21,8 @@ export function Squares({ radius, tileSize, prec, reflectSpeed }: { radius: numb
       squares.push((
         <Square
           key={`inc${inclination}az${azimuth}`}
-          transform={getSquareTransform(azimuth, inclination, radius)}
+          inclination={inclination}
+          azimuth={azimuth}
           radius={radius}
         >
           <Tile

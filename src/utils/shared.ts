@@ -13,3 +13,11 @@ export async function sha256(str: string): Promise<string> {
 export function randomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function convertToCartesian(radius: number, azimuth: number, inclination: number) {
+  const x = radius * Math.cos(azimuth) * Math.sin(inclination);
+  const y = radius * Math.sin(azimuth) * Math.sin(inclination);
+  const z = radius * Math.cos(inclination);
+  
+  return [x, y, z];
+}
