@@ -1,5 +1,6 @@
 import { isString } from "../utils/shared";
 import Login from "../components/login";
+import DiscoBall from "../components/disco-ball";
 
 export const runtime = 'edge';
 
@@ -11,7 +12,9 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
   }
 
   return (
-    <div>state</div>
+    <div>
+      state
+      <DiscoBall />
+    </div>
   )
 }
-

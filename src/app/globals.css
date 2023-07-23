@@ -6,3 +6,19 @@ body {
   color: white;
   background-color: black;
 }
+
+@keyframes rotateDiscoBall {
+  0% {transform: rotateX(90deg) rotateZ(0deg) rotate(0deg); }
+  100% {transform: rotateX(90deg) rotateZ(360deg) rotate(0deg); }
+}
+
+@keyframes rotateDiscoBallMiddle {
+  0% {transform: rotateX(90deg) rotateY(0deg) rotate(0deg); }
+  100% {transform: rotateX(90deg) rotateY(-360deg) rotate(0deg); }
+}
+
+@keyframes reflect {
+  0% {opacity: 1;}
+  50% {opacity: 0.4;}  
+  100% {opacity: 1;}  
+}

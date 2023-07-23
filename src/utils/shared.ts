@@ -9,3 +9,7 @@ export async function sha256(str: string): Promise<string> {
     .call(new Uint8Array(buf), (x) => ('00' + x.toString(16)).slice(-2))
     .join('');
 }
+
+export function randomNumber(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
