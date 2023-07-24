@@ -3,14 +3,20 @@ import { isString, sha256 } from "@/src/utils/shared";
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getNewState } from "./utils/states";
+import createMiddleware from 'next-intl/middleware';
 
 export const runtime = 'experimental-edge';
-
-export async function middleware(req: NextRequest): Promise<Response> {
+ 
+const intlMiddleware = createMiddleware({
+  locales: ['en', 'nl'],
+  defaultLocale: 'en'
+});
+ 
+export default async function middleware(req: NextRequest): Promise<Response> {
   const { state } = Object.fromEntries(req.nextUrl.searchParams);
   
   if (isString(state)) {
-    return NextResponse.next();
+    return intlMiddleware(req);
   }
 
   const cfpPassword = await sha256(process.env.CFP_PASSWORD || '');
@@ -23,9 +29,9 @@ export async function middleware(req: NextRequest): Promise<Response> {
     return NextResponse.redirect(redirectUrl);
   }
 
-  return NextResponse.next();
+  return intlMiddleware(req);
 }
 
 export const config = {
-  matcher: '/',
-}
+  matcher: ['/((?!api|_next|.*\\..*).*)']
+};

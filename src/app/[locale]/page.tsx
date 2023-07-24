@@ -1,6 +1,6 @@
-import { isString } from "../utils/shared";
-import Login from "../components/login";
-import DiscoBall from "../components/disco-ball";
+import { isString } from "../../utils/shared";
+import Login from "../../components/login";
+import DiscoBall from "../../components/disco-ball";
 
 export const runtime = 'edge';
 
@@ -9,17 +9,19 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
 
   if (isString(searchState)) {
     return (
-      <>
+      <div>
         <DiscoBall />
+        <div className="sm:w-1/12 h-12"></div>
         <Login searchState={searchState} />
-      </>
+      </div>
     );
   }
 
   return (
     <div>
-      state
       <DiscoBall />
+      <div className="sm:w-1/12 h-12"></div>
+      TEST
     </div>
   )
 }

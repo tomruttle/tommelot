@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   const newState = getNewState(cfpPassword, password.toString())
 
   const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = '/';
+  redirectUrl.pathname = '/en';
   
   if (newState) {
     redirectUrl.searchParams.set('state', newState);
