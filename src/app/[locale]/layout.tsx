@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Red_Hat_Mono } from 'next/font/google'
 import { useLocale } from 'next-intl';
+import LocaleSwitcher from '@/src/components/locale-switcher';
 
 export const runtime = 'edge';
 
@@ -18,6 +19,10 @@ export default function LocaleLayout({ children, params }: { children: React.Rea
   return (
     <html lang={locale}>
       <body className={redHatMono.className}>
+        <div className="max-w-fit border items-end">
+          <LocaleSwitcher locale={locale} />
+        </div>
+
         <main className="flex min-h-screen flex-col items-center justify-between p-24">{children}</main>
       </body>
     </html>
