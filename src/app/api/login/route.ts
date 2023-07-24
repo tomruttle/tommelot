@@ -11,9 +11,10 @@ export async function POST(req: NextRequest) {
   const { password } = Object.fromEntries(body);
   const cfpPassword = process.env.CFP_PASSWORD || '';
   const newState = getNewState(cfpPassword, password.toString())
+  const locale = req.cookies.get('NEXT_LOCALE')?.value || '';
 
   const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = '/en';
+  redirectUrl.pathname = `/${locale}`;
   
   if (newState) {
     redirectUrl.searchParams.set('state', newState);
