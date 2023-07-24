@@ -1,25 +1,25 @@
-import { Squares } from "./squares";
+import { getCoordinates } from "../utils/shared";
+import { Tile } from "./tile";
 
-export default function DiscoBall() {
-  const radius = 100;
-  const tileSize = 9;
-  const prec = 30;
-  const rotationDuration = 100;
-  const reflectSpeed = 5;
+export default function DiscoBall(
+  { radius = 100, tileSize = 9, rotationDuration = 100, reflectSpeed = 5, prec = 30 }:
+  { radius: number, tileSize: number, rotationDuration: number, reflectSpeed: number, prec: number }
+) {
+  const ballSize = `${2 * radius}px`;
 
   return (
     <div style={{
       position: 'relative',
-      height: `${2 * radius}px`,
-      width: `${2 * radius}px`,
+      height: ballSize,
+      width: ballSize,
     }}>
       <div
         style={{
           borderRadius: '100%',
           backgroundColor: 'white',
           opacity: '0.2',
-          width: `${2 * radius}px`,
-          height: `${2 * radius}px`,
+          width: ballSize,
+          height: ballSize,
           position: 'absolute',
           WebkitFilter: 'blur(20px)',
         }}
@@ -29,12 +29,12 @@ export default function DiscoBall() {
         style={{
           transformStyle: 'preserve-3d',
           animation: `rotateDiscoBall ${rotationDuration}s linear infinite`,
-          width: `${2 * radius}px`,
-          height: `${2 * radius}px`,
+          width: ballSize,
+          height: ballSize,
           position: 'absolute',
         }}
       >
-        <div 
+        <div
           style={{
             height: '100%',
             borderRadius: '100%',
@@ -45,7 +45,17 @@ export default function DiscoBall() {
           }}
         ></div>
 
-        <Squares radius={radius} tileSize={tileSize} prec={prec} reflectSpeed={reflectSpeed} /></div>
+        {getCoordinates(radius, tileSize, prec).map(({ azimuth, inclination }) => (
+          <Tile
+            key={`inc${inclination}az${azimuth}`}
+            inclination={inclination}
+            azimuth={azimuth}
+            radius={radius}
+            tileSize={tileSize}
+            reflectSpeed={reflectSpeed}
+          />
+        ))}
+      </div>
     </div>
   )
 }

@@ -1,21 +1,32 @@
-import { randomNumber } from "../utils/shared";
+import { convertToCartesian, randomNumber } from "../utils/shared";
 
-export function Tile({ animationDelay, inclination, azimuth, size, reflectSpeed }: { animationDelay: number, inclination: number, azimuth: number, size: number, reflectSpeed: number }) {
+export function Tile({ inclination, azimuth, tileSize, reflectSpeed, radius }: { inclination: number, azimuth: number, tileSize: number, reflectSpeed: number, radius: number }) {
+  const [x, y, z] = convertToCartesian(radius, azimuth, inclination);
   const isBright = (inclination > 1.3 && inclination < 1.9) || (inclination < -1.3 && inclination > -1.9);
   const colourValue = isBright ? randomNumber(130, 255) : randomNumber(110, 190);
-  
+
   return (
     <div
       style={{
-        backgroundColor: `rgb(${colourValue},${colourValue},${colourValue})`,
-        width: `${size}px`,
-        height: `${size}px`,
-        transformOrigin: "0 0 0",
-        transform: `rotate(${azimuth}rad) rotateY(${inclination}rad)`,
-        animation: `reflect ${reflectSpeed}s linear infinite`,
-        animationDelay: `${animationDelay}s`,
-        backfaceVisibility: "hidden",
+        transform: `translateX(${x}px) translateY(${y}px) translateZ(${z}px)`,
+        transformStyle: 'preserve-3d',
+        position: 'absolute',
+        top: `${radius}px`,
+        left: `${radius}px`,
       }}
-    ></div>
+    >
+      <div
+        style={{
+          backgroundColor: `rgb(${colourValue},${colourValue},${colourValue})`,
+          width: `${tileSize}px`,
+          height: `${tileSize}px`,
+          transformOrigin: "0 0 0",
+          transform: `rotate(${azimuth}rad) rotateY(${inclination}rad)`,
+          animation: `reflect ${reflectSpeed}s linear infinite`,
+          animationDelay: `${randomNumber(0, 20) / 10}s`,
+          backfaceVisibility: "hidden",
+        }}
+      ></div>
+    </div>
   )
 }

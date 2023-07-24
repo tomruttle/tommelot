@@ -1,3 +1,5 @@
+export const FUZZY = 0.001;
+
 export function isString(test: unknown): test is string {
   return typeof test === 'string' && test.length > 0;
 }
@@ -20,4 +22,34 @@ export function convertToCartesian(radius: number, azimuth: number, inclination:
   const z = radius * Math.cos(inclination);
   
   return [x, y, z];
+}
+
+function getChordRadius(radius: number, inclination: number) {
+  return Math.abs(2 * radius * Math.sin(inclination)) / 2.5;
+}
+
+function getCircumfrence(radius: number) {
+  return 2 * Math.PI * radius;
+}
+
+function getAngleIncrement(inclination: number, radius: number, tileSize: number) {
+  const currentRadius = getChordRadius(radius, inclination);
+  const circumference = getCircumfrence(currentRadius);
+  const squaresThatFit = Math.floor(circumference / tileSize);
+
+  return (2 * Math.PI - FUZZY) / squaresThatFit;
+}
+
+export function getCoordinates(radius: number, tileSize: number, prec: number) {
+  const squares: Array<{ azimuth: number, inclination: number }> = []
+
+  for (let inclination = FUZZY; inclination < Math.PI; inclination += (Math.PI - FUZZY) / prec) {
+    const angleInc = getAngleIncrement(inclination, radius, tileSize);
+
+    for (let azimuth = (angleInc / 2) + FUZZY; azimuth < 2 * Math.PI; azimuth += angleInc) {
+      squares.push({ azimuth, inclination });
+    }
+  }
+
+  return squares;
 }
