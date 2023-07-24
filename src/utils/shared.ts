@@ -1,5 +1,3 @@
-export const FUZZY = 0.001;
-
 export function isString(test: unknown): test is string {
   return typeof test === 'string' && test.length > 0;
 }
@@ -24,7 +22,8 @@ export function convertToCartesian(radius: number, azimuth: number, inclination:
   return [x, y, z];
 }
 
-function getChordRadius(radius: number, inclination: number) {
+function getSegmentRadius(radius: number, inclination: number) {
+  // return Math.abs(radius * Math.cos(inclination));
   return Math.abs(2 * radius * Math.sin(inclination)) / 2.5;
 }
 
@@ -32,21 +31,20 @@ function getCircumfrence(radius: number) {
   return 2 * Math.PI * radius;
 }
 
-function getAngleIncrement(inclination: number, radius: number, tileSize: number) {
-  const currentRadius = getChordRadius(radius, inclination);
-  const circumference = getCircumfrence(currentRadius);
-  const squaresThatFit = Math.floor(circumference / tileSize);
-
-  return (2 * Math.PI - FUZZY) / squaresThatFit;
+function getTilesAtInclination(inclination: number, radius: number, tileSize: number) {
+  const segmentRadius = getSegmentRadius(radius, inclination);
+  const segmentCircumfrence = getCircumfrence(segmentRadius);
+  return Math.floor(segmentCircumfrence / tileSize);
 }
 
 export function getCoordinates(radius: number, tileSize: number, prec: number) {
   const squares: Array<{ azimuth: number, inclination: number }> = []
 
-  for (let inclination = FUZZY; inclination < Math.PI; inclination += (Math.PI - FUZZY) / prec) {
-    const angleInc = getAngleIncrement(inclination, radius, tileSize);
+  for (let inclination = 0; inclination < Math.PI; inclination += Math.PI / prec) {
+    const tilesAtInclination = getTilesAtInclination(inclination, radius, tileSize);
+    const angleInc = (2 * Math.PI) / tilesAtInclination;
 
-    for (let azimuth = (angleInc / 2) + FUZZY; azimuth < 2 * Math.PI; azimuth += angleInc) {
+    for (let azimuth = (angleInc / 2); azimuth < 2 * Math.PI; azimuth += angleInc) {
       squares.push({ azimuth, inclination });
     }
   }
