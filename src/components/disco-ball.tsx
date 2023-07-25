@@ -4,7 +4,7 @@ import { Tile } from "./tile";
 export const runtime = 'edge';
 
 export default function DiscoBall(
-  { radius = 100, tileSize = 9, rotationDuration = 100, reflectSpeed = 5, prec = 30 }:
+  { radius = 100, tileSize = 9, rotationDuration = 100, reflectSpeed = 5 }:
   { radius?: number, tileSize?: number, rotationDuration?: number, reflectSpeed?: number, prec?: number }
 ) {
   const ballSize = `${2 * radius}px`;
@@ -47,7 +47,7 @@ export default function DiscoBall(
           }}
         ></div>
 
-        {getCoordinates(radius, tileSize, prec).map(({ azimuth, inclination }) => (
+        {getCoordinates(radius, tileSize).map(({ azimuth, inclination }) => (
           <Tile
             key={`inc${inclination}az${azimuth}`}
             inclination={inclination}

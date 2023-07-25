@@ -37,11 +37,20 @@ function getTilesAtInclination(inclination: number, radius: number, tileSize: nu
   return Math.floor(segmentCircumfrence / tileSize);
 }
 
-export function getCoordinates(radius: number, tileSize: number, prec: number) {
+export function getCoordinates(radius: number, tileSize: number) {
   const squares: Array<{ azimuth: number, inclination: number }> = []
 
-  for (let inclination = 0; inclination < Math.PI; inclination += Math.PI / prec) {
+  const tilesAtEquator = getTilesAtInclination(Math.PI / 2, radius, tileSize);
+  if (tilesAtEquator === 0) {
+    return squares;
+  }
+
+  for (let inclination = 0; inclination < Math.PI; inclination += (2 * Math.PI) / tilesAtEquator) {
     const tilesAtInclination = getTilesAtInclination(inclination, radius, tileSize);
+    if (tilesAtInclination === 0) {
+      continue;
+    }
+
     const angleInc = (2 * Math.PI) / tilesAtInclination;
 
     for (let azimuth = (angleInc / 2); azimuth < 2 * Math.PI; azimuth += angleInc) {
