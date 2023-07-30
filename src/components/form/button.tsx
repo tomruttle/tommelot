@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react"
 
-export default function Button({ text, isDisabled, onClick }: { text: string, isDisabled: boolean, onClick?: MouseEventHandler<HTMLButtonElement> }) {
+export default function Button({ text, isDisabled = false, onClick }: { text: string, isDisabled?: boolean, onClick?: MouseEventHandler<HTMLButtonElement> }) {
   return (
     <div className="sm:w-3/12">
       <button
