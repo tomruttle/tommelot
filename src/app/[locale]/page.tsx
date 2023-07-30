@@ -1,27 +1,15 @@
-import { isString } from "../../utils/shared";
-import Login from "../../components/login";
+import Link from "next-intl/link";
 import DiscoBall from "../../components/disco-ball";
 
 export const runtime = 'edge';
 
-export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-  const searchState = searchParams.state;
-
-  if (isString(searchState)) {
-    return (
-      <div>
-        <DiscoBall />
-        <div className="sm:w-1/12 h-12"></div>
-        <Login searchState={searchState} />
-      </div>
-    );
-  }
-
+export default function Home() {
   return (
     <div>
-      <DiscoBall />
+      <DiscoBall radius={50} tileSize={6} tileGap={2} />
       <div className="sm:w-1/12 h-12"></div>
-      TEST
+      <div>TEST</div>
+      <Link href="/rsvp">RSVP PLEASE</Link>
     </div>
   )
 }

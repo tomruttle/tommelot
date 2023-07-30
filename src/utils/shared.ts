@@ -2,6 +2,14 @@ export function isString(test: unknown): test is string {
   return typeof test === 'string' && test.length > 0;
 }
 
+function formatString(input: string): string {
+  return input.trim().toLocaleLowerCase();
+}
+
+export function looseCompareStrings(str1: unknown, str2: unknown) {
+  return isString(str1) && isString(str2) && formatString(str1) === formatString(str2)
+}
+
 export async function sha256(str: string): Promise<string> {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
 

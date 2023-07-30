@@ -1,16 +1,10 @@
-import Link from 'next/link'
-
-export const runtime = 'edge';
-
-const locales = {
-  en: 'EN',
-  nl: 'NL'
-}
+import Link from 'next-intl/link';
+import { locales } from '../utils/constants';
 
 function Item({ path, locale, text }: { path: string, locale: string, text: string }) {
   return (
     <span key={path}>
-      {path === locale ? text : <Link href={`/${path}`}>{text}</Link>}
+      {path === locale ? text : <Link href='/' locale={path}>{text}</Link>}
     </span>
   )
 }

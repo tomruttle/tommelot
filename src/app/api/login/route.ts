@@ -1,6 +1,6 @@
 import { CFP_COOKIE_KEY } from "@/src/utils/constants";
-import { getNewState } from "@/src/utils/states";
-import { sha256 } from "@/src/utils/shared";
+import { looseCompareStrings, sha256 } from "@/src/utils/shared";
+import { States } from "@/src/utils/states";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -10,21 +10,22 @@ export async function POST(req: NextRequest) {
   const body = await req.formData();
   const { password } = Object.fromEntries(body);
   const cfpPassword = process.env.CFP_PASSWORD || '';
-  const newState = getNewState(cfpPassword, password.toString())
   const locale = req.cookies.get('NEXT_LOCALE')?.value || '';
 
   const redirectUrl = req.nextUrl.clone();
   redirectUrl.pathname = `/${locale}`;
   
-  if (newState) {
-    redirectUrl.searchParams.set('state', newState);
-  } else {
+  const passwordsMatch = looseCompareStrings(cfpPassword, password);
+
+  if (passwordsMatch) {
     redirectUrl.searchParams.delete('state');
+  } else {
+    redirectUrl.searchParams.set('state', States.Incorrect.toString());
   }
   
   const res = NextResponse.redirect(redirectUrl, 303);
   
-  if (newState === null) {
+  if (passwordsMatch) {
     res.cookies.set(CFP_COOKIE_KEY, await sha256(cfpPassword));
   }
 

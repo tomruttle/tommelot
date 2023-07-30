@@ -1,10 +1,8 @@
 import { getCoordinates } from "../utils/shared";
 import { Tile } from "./tile";
 
-export const runtime = 'edge';
-
 export default function DiscoBall(
-  { radius = 100, tileSize = 9, tileGap = 4, rotationDuration = 50, reflectSpeed = 5 }:
+  { radius = 200, tileSize = 18, tileGap = 4, rotationDuration = 30, reflectSpeed = 5 }:
   { radius?: number, tileSize?: number, tileGap?: number, rotationDuration?: number, reflectSpeed?: number, prec?: number }
 ) {
   const ballSize = `${2 * radius}px`;
