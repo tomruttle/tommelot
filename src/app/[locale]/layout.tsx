@@ -18,7 +18,7 @@ export default function LocaleLayout({ children, params }: { children: React.Rea
   return (
     <html lang={locale}>
       <body className={redHatMono.className}>
-        <div className={`max-w-fit ml-auto mt-1 mr-1 border ${LINE_CLASSES} p-1`}>
+        <div className={`max-w-fit ml-auto mt-4 mr-4 border ${LINE_CLASSES} p-1`}>
           <LocaleSwitcher locale={locale} />
         </div>
 
