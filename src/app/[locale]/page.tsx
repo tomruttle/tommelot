@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import RsvpForm from "@/src/components/rsvp/rsvp-form";
 import TH3 from "@/src/components/atoms/th3";
 import TP from "@/src/components/atoms/tp";
+import { LINE_CLASSES } from "@/src/utils/constants";
 
 export const runtime = 'edge';
 
@@ -24,7 +25,7 @@ export default async function Home({ params: { locale } }: { params: { locale: s
 
       <div className="text-center">
         <TP>2 March 2024<br /><br />Berlin</TP>
-        <hr className="w-1/2 mx-auto my-4" />
+        <hr className={`w-1/2 mx-auto my-4 border-b ${LINE_CLASSES}`} />
         <TP>2 Maart 2024<br /><br />Berlijn</TP>
 
         <div className="my-4">

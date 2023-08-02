@@ -8,21 +8,26 @@ export function Radio({ label, options, currentValue, name, onChange }: { label?
   return (
     <div>
       {isString(label) ? label : null}
+
       <Spacer />
+
       {options.map(({ id, value, text }) => (
         <label className="block flex" key={id} htmlFor={id}>
+
           {text}
+
           <Spacer />
+
           <input
             type="radio"
             id={id}
             name={name}
             value={value}
+            required
             {...typeof onChange === 'function' ? {
               checked: currentValue === value,
               onChange,
             } : {}}
-            required
           />
         </label>
       ))}

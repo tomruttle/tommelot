@@ -5,6 +5,7 @@ import { Radio } from "../form/radio";
 import Spacer from "../form/spacer";
 import Input from "../form/input";
 import Button from "../form/button";
+import { LINE_CLASSES } from "@/src/utils/constants";
 
 export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventHandler<HTMLFormElement>, disableSubmit: boolean }) {
   const t = useTranslations();
@@ -13,7 +14,7 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
 
   return (
     (
-      <form className="p-8 border-dashed border-2 border-neutral-600" onSubmit={onSubmit}>
+      <form className={`p-8 border ${LINE_CLASSES}`} onSubmit={onSubmit}>
         <PersonForm nameName="name" emailName="email" phoneName="phone" />
 
         <Radio

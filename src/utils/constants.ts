@@ -4,3 +4,5 @@ export const locales = {
   en: 'EN',
   nl: 'NL'
 }
+
+export const LINE_CLASSES = 'border-dashed border-neutral-400'
