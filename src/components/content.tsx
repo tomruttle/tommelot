@@ -53,8 +53,8 @@ export default function Content() {
 
       <TH3>Contact</TH3>
 
-      <TP>If you have any questions, please feel free to send them to info@tommelot.com.</TP>
-      <TP>Guest participation is encouraged. If you would like to give a speech or surprise Tom and Annelot in a different way during the event, please reach out to our wonderful masters of ceremony, Britt Boeddha and Mei Lee, at mc@tommelot.com.</TP>
+      <TP>If you have any questions, please feel free to send them to <TA href="mailto:info@tommelot.com">info@tommelot.com</TA>.</TP>
+      <TP>Guest participation is encouraged. If you would like to give a speech or surprise Tom and Annelot in a different way during the event, please reach out to our wonderful masters of ceremony, Britt Boeddha and Mei Lee, at <TA href="mailto:mc@tommelot.com">mc@tommelot.com</TA>.</TP>
 
       <TH3>References</TH3>
 
