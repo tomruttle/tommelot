@@ -10,10 +10,8 @@ const redHatMono = Red_Hat_Mono({ subsets: ['latin'] })
 export default function LocaleLayout({ children, params }: { children: React.ReactNode; params: { locale: string }; }) {
   const locale = useLocale();
  
-  // Show a 404 error if the user requests an unknown locale
   if (params.locale !== locale) {
     notFound();
-    return;
   }
 
   return (
@@ -23,7 +21,7 @@ export default function LocaleLayout({ children, params }: { children: React.Rea
           <LocaleSwitcher locale={locale} />
         </div>
 
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">{children}</main>
+        <main className="min-h-screen mx-auto md:w-3/4 xl:w-1/2 p-24 space-y-8">{children}</main>
       </body>
     </html>
   );

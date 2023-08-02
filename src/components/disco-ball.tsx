@@ -8,11 +8,14 @@ export default function DiscoBall(
   const ballSize = `${2 * radius}px`;
 
   return (
-    <div style={{
-      position: 'relative',
-      height: ballSize,
-      width: ballSize,
-    }}>
+    <div
+      className="mx-auto"
+      style={{
+        position: 'relative',
+        height: ballSize,
+        width: ballSize,
+      }}
+    >
       <div
         style={{
           borderRadius: '100%',
