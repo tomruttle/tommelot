@@ -4,7 +4,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { loadMessages } from "@/i18n";
 import { notFound } from "next/navigation";
 import RsvpForm from "@/src/components/rsvp/rsvp-form";
-import TH3 from "@/src/components/atoms/th3";
 import TP from "@/src/components/atoms/tp";
 import { LINE_CLASSES } from "@/src/utils/constants";
 
@@ -32,8 +31,6 @@ export default async function Home({ params: { locale } }: { params: { locale: s
           <TP>TMP: Spotify thing!</TP>
         </div>
       </div>
-
-      <TH3>RSVP</TH3>
 
       <NextIntlClientProvider locale={locale} messages={messages}>
         <RsvpForm />

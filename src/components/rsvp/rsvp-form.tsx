@@ -5,6 +5,7 @@ import { isString } from "@/src/utils/shared";
 import PostSubmission from "./post-submission";
 import Form from "./form";
 import TP from "../atoms/tp";
+import TH3 from "../atoms/th3";
 
 export default function RsvpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,6 +43,8 @@ export default function RsvpForm() {
     <PostSubmission attendance={isAttending === 'yes'} />
   ) : (
     <>
+      <TH3>RSVP</TH3>
+
       <TP>Please join in celebrating Tom and Annelot’s commitment to loving each other as hard as they can. Your presence is requested at Hallesches Haus, Berlin, Germany, on Saturday, March 2, 2024.</TP>
       <TP>Please let us know if you will be attending at your earliest convenience, but no later than 22-10-2023.</TP>
 

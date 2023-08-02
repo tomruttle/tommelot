@@ -26,9 +26,9 @@ export default function Content() {
 
       <TH3>Travel recommendations</TH3>
 
-      <TP>If you are planning to explore Berlin, we would like to offer you a <TA href="https://goo.gl/maps/r1S3p9dehQ65iXdTA">list of our favorite spots</TA></TP>
+      <TP>If you are planning to explore Berlin, we would like to offer you a <TA href="https://goo.gl/maps/r1S3p9dehQ65iXdTA">list of our favorite spots</TA>.</TP>
       <TP>Berlin has excellent public transportation. You can buy your tickets online in the <TA href="https://www.bvg.de/en/tickets-tariffs/all-apps">BVG app</TA>. These tickets can be used on buses, metros and trains alike.</TP>
-      <TP>If you are Dutch, you probably prefer having a bike. In that case, consider using the various <TA href="https://www.berlin.de/en/getting-around/bikesharing/">bike-sharing options</TA></TP>
+      <TP>If you are Dutch, you probably prefer having a bike. In that case, consider using the various <TA href="https://www.berlin.de/en/getting-around/bikesharing/">bike-sharing options</TA>.</TP>
       <TP>Taxis can be ordered via various apps, like Free Now and taxi.eu.</TP>
       <TP>Here is a list of accommodation options each no more than a ten minute walk away from Hallesches Haus:</TP>
 
