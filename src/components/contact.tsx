@@ -7,7 +7,7 @@ export default function Contact() {
 
   return (
     <>
-      <TH3>{t('contact.heading')}</TH3>
+      <TH3 id="contact">{t('contact.heading')}</TH3>
       {t.rich('contact.text', {
         mcEmail: (chunks) => <TA href="mailto:mc@tommelot.com">{chunks}</TA>,
         infoEmail: (chunks) => <TA href="mailto:info@tommelot.com">{chunks}</TA>,

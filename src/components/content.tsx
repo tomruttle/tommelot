@@ -7,17 +7,17 @@ export default function Content() {
 
   return (
     <>
-      <TH3>{t('story.heading')}</TH3>
+      <TH3 id="story">{t('story.heading')}</TH3>
 
       {t.rich('story.text')}
 
-      <TH3>{t('wedding.heading')}</TH3>
+      <TH3 id="wedding">{t('wedding.heading')}</TH3>
 
       <div className="mx-auto w-max">{t.rich('wedding.times')}</div>
 
       {t.rich('wedding.text', { mcEmail: (chunks) => <TA href="mailto:mc@tommelot.com">{chunks}</TA> })}
 
-      <TH3>{t('travel.heading')}</TH3>
+      <TH3 id="travel">{t('travel.heading')}</TH3>
 
       {t.rich('travel.text', {
         mapsLink: (chunks) => <TA href="https://goo.gl/maps/r1S3p9dehQ65iXdTA">{chunks}</TA>,

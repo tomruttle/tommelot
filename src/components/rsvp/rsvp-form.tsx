@@ -43,7 +43,7 @@ export default function RsvpForm() {
 
   return (
     <>
-      <TH3>RSVP</TH3>
+      <TH3 id="rsvp">RSVP</TH3>
 
       {isString(isAttending) ? <TP>{isAttending === 'yes' ? t('is-attending') : t('not-attending')}</TP> : (
         <>
