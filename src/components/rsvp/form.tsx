@@ -7,7 +7,8 @@ import Button from "../form/button";
 import { LINE_CLASSES } from "@/src/utils/constants";
 
 export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventHandler<HTMLFormElement>, disableSubmit: boolean }) {
-  const t = useTranslations();
+  const t = useTranslations('rsvp');
+
   const [hasPlusOne, setHasPlusOne] = useState<string | undefined>();
   const [attendance, setAttendance] = useState<string | undefined>();
 
@@ -20,8 +21,8 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
           name="attendance"
           currentValue={attendance}
           options={[
-            { id: 'attend', value: 'yes', text: 'Will Attend' },
-            { id: 'not-attend', value: 'no', text: 'Will Not Attend' },
+            { id: 'attend', value: 'yes', text: t('attend') },
+            { id: 'not-attend', value: 'no', text: t('not-attend') },
           ]}
           onChange={(e) => {
             setAttendance(e.target.value)
@@ -36,11 +37,11 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
             <Spacer />
 
             <Radio
-              label="Will you be bringing a +1?"
+              label={t('plus-one')}
               name="plus-one"
               options={[
-                { id: 'has-plus-one', value: 'yes', text: 'Yes' },
-                { id: 'no-plus-one', value: 'no', text: 'No' },
+                { id: 'has-plus-one', value: 'yes', text: t('yes') },
+                { id: 'no-plus-one', value: 'no', text: t('no') },
               ]}
               currentValue={hasPlusOne}
               onChange={(e) => { setHasPlusOne(e.target.value) }}
@@ -50,7 +51,7 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
 
             {hasPlusOne === 'yes' ? (
               <>
-                +1 details:
+                {t('plus-one-details')}:
                 <div className="ml-12">
                   <PersonForm nameName="plus-one-name" phoneName="plus-one-phone" emailName="plus-one-email" />
                 </div>
@@ -64,43 +65,43 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
             )}
 
             <Radio
-              label="If enough people are interested in exploring the city on Saturday morning, we would like to create an opportunity for our guests to get familiar with the city of Berlin. Would you want to join a guided walking tour departing around 10:30?"
+              label={t('tour')}
               name="tour"
               options={[
-                { id: 'yes-tour', value: 'yes', text: 'Yes' },
-                { id: 'maybe-tour', value: 'maybe', text: 'Maybe' },
-                { id: 'no-tour', value: 'no', text: 'No' },
+                { id: 'yes-tour', value: 'yes', text: t('yes') },
+                { id: 'maybe-tour', value: 'maybe', text: t('maybe') },
+                { id: 'no-tour', value: 'no', text: t('no') },
               ]}
             />
 
             <Spacer />
 
             <Radio
-              label="We are considering organizing a brunch on the day after the wedding. Would you be interested in joining a Sunday morning brunch around noon?"
+              label={t('brunch')}
               name="brunch"
               options={[
-                { id: 'yes-brunch', value: 'yes', text: 'Yes' },
-                { id: 'maybe-brunch', value: 'maybe', text: 'Maybe' },
-                { id: 'no-brunch', value: 'no', text: 'No' },
+                { id: 'yes-brunch', value: 'yes', text: t('yes') },
+                { id: 'maybe-brunch', value: 'maybe', text: t('maybe') },
+                { id: 'no-brunch', value: 'no', text: t('no') },
               ]}
             />
 
             <Spacer />
 
             <Radio
-              label="What type of eater are you?"
+              label={t('eater')}
               name="eater"
               options={[
-                { id: 'vegetarian', value: 'vegetarian', text: 'Vegetarian' },
-                { id: 'vegan', value: 'vegan', text: 'Vegan' },
-                { id: 'onmivore', value: 'omnivore', text: 'Omnivore' },
+                { id: 'vegetarian', value: 'vegetarian', text: t('vegetarian') },
+                { id: 'vegan', value: 'vegan', text: t('vegan') },
+                { id: 'onmivore', value: 'omnivore', text: t('omnivore') },
               ]}
             />
 
             <Spacer />
 
             <div className="mb-4">
-              <label htmlFor="diet">Do you have any other dietary requirements (e.g. allergies) we should take into account?</label>
+              <label htmlFor="diet">{t('diet')}</label>
               <Spacer />
               <textarea className="form-input bg-black border-gray-200 focus:ring-0 focus:border-gray-300" id="diet" name="diet" />
             </div>

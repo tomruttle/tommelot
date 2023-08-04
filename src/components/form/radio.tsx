@@ -13,7 +13,6 @@ export function Radio({ label, options, currentValue, name, onChange }: { label?
 
       {options.map(({ id, value, text }) => (
         <label className="block flex" key={id} htmlFor={id}>
-
           {text}
 
           <Spacer />
