@@ -27,7 +27,7 @@ export default async function Home({ params: { locale } }: { params: { locale: s
 
       <IntroText />
 
-      <p className="text-xs w-fit mx-auto"><TA href="#story">Story</TA> &#8226; <TA href="#wedding">Wedding</TA> &#8226; <TA href="#travel">Travel</TA> &#8226; <TA href="#rsvp">RSVP</TA> &#8226; <TA href="#contact">Contact</TA></p>
+      <nav className="text-xs w-fit mx-auto"><TA href="#story">Story</TA> &#8226; <TA href="#wedding">Wedding</TA> &#8226; <TA href="#travel">Travel</TA> &#8226; <TA href="#rsvp">RSVP</TA> &#8226; <TA href="#contact">Contact</TA></nav>
 
       <Content />
 
