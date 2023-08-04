@@ -14,7 +14,7 @@ export default function Login({ searchState }: { searchState?: string }) {
 
   return (
     <form className="w-full max-w-sm" action="/api/login" method="post">
-      <div className="sm:flex">
+      <div className="flex flex-wrap">
         <Input {...{ id: 'password', name: 'password', type: 'password', borderColor: inputBorderColor, focusColor: inputFocusBorderColor }}>
           {isIncorrectPassword ? (
               <div className="text-xs text-red-500 py-1 px-4">{t('incorrect-password')}</div>
