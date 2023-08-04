@@ -23,7 +23,7 @@ export default function RsvpForm() {
 
     try {
       const formData = new FormData(e.target);
-      const res = await fetch('/api/rsvp', { method: 'POST', body: new FormData(e.target) })
+      const res = await fetch('/api/rsvp', { method: 'POST', body: formData })
 
       if (res.status !== 200) {
         throw new Error(`Error submitting form. Server responded with status ${res.status}`);

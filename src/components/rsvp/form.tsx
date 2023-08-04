@@ -3,7 +3,6 @@ import { FormEventHandler, useState } from "react";
 import PersonForm from "./person-form";
 import { Radio } from "../form/radio";
 import Spacer from "../form/spacer";
-import Input from "../form/input";
 import Button from "../form/button";
 import { LINE_CLASSES } from "@/src/utils/constants";
 
@@ -56,7 +55,13 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
                   <PersonForm nameName="plus-one-name" phoneName="plus-one-phone" emailName="plus-one-email" />
                 </div>
               </>
-            ) : null}
+            ) : (
+              <>
+                <input type="hidden" id="plus-one-name" name="plus-one-name" />
+                <input type="hidden" id="plus-one-phone" name="plus-one-phone" />
+                <input type="hidden" id="plus-one-email" name="plus-one-email" />
+              </>
+            )}
 
             <Radio
               label="If enough people are interested in exploring the city on Saturday morning, we would like to create an opportunity for our guests to get familiar with the city of Berlin. Would you want to join a guided walking tour departing around 10:30?"
@@ -99,10 +104,6 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
               <Spacer />
               <textarea className="form-input bg-black border-gray-200 focus:ring-0 focus:border-gray-300" id="diet" name="diet" />
             </div>
-
-            <Spacer />
-
-            <Input label="Do you vow to dress as extravagantly as you can bear? (Enter initials)" id="extravagance" name="extravagance" />
 
             <Spacer />
           </>
