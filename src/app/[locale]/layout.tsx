@@ -22,7 +22,7 @@ export default function LocaleLayout({ children, params }: { children: React.Rea
           <LocaleSwitcher locale={locale} />
         </div>
 
-        <main className="min-h-screen mx-auto md:w-3/4 xl:w-1/2 p-24 space-y-8">{children}</main>
+        <main className="min-h-screen mx-auto md:w-3/4 xl:w-1/2 p-8 sm:p-16 md:p-24 space-y-8">{children}</main>
       </body>
     </html>
   );

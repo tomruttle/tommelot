@@ -14,7 +14,7 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
 
   return (
     (
-      <form className={`p-8 border ${LINE_CLASSES}`} onSubmit={onSubmit}>
+      <form className={`p-8 border ${LINE_CLASSES} min-w-fit`} onSubmit={onSubmit}>
         <PersonForm nameName="name" emailName="email" phoneName="phone" />
 
         <Radio
