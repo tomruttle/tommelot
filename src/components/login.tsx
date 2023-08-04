@@ -23,7 +23,7 @@ export default function Login({ searchState }: { searchState?: string }) {
         
         <Spacer />
 
-        <Button text={t('enter')} />
+        <Button text={t('login')} />
       </div>
     </form>
   );
