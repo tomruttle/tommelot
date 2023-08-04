@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import RsvpForm from "@/src/components/rsvp/rsvp-form";
 import IntroText from "@/src/components/intro-text";
 import Contact from "@/src/components/contact";
+import Playlist from "@/src/components/playlist";
 
 export const runtime = 'edge';
 
@@ -31,6 +32,8 @@ export default async function Home({ params: { locale } }: { params: { locale: s
       </NextIntlClientProvider>
 
       <Contact />
+
+      <Playlist />
     </>
   )
 }

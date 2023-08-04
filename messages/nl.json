@@ -44,6 +44,8 @@
         "enter": "OK"
     },
     "suggestions": "suggesties",
+    "playlist": "Sfeermaker",
     "incorrect-password": "Onjuist Wachtwoord",
-    "password": "Wachtwoord"
+    "password": "Wachtwoord",
+    "login": "OK"
 }

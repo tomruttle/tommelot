@@ -44,6 +44,8 @@
         "enter": "Enter"
     },
     "suggestions": "suggestions",
+    "playlist": "Mood Setter",
     "incorrect-password": "Incorrect Password",
-    "password": "Password"
+    "password": "Password",
+    "login": "Enter"
 }
