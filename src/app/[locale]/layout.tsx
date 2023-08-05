@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Red_Hat_Mono } from 'next/font/google'
 import { useLocale } from 'next-intl';
 import LocaleSwitcher from '@/src/components/locale-switcher';
+import { colors } from '@/src/utils/constants';
 
 export const runtime = 'edge';
 
@@ -16,7 +17,7 @@ export default function LocaleLayout({ children, params }: { children: React.Rea
 
   return (
     <html lang={locale}>
-      <body className={redHatMono.className}>
+      <body className={`${redHatMono.className} ${colors.BACKGROUND_COLOR} ${colors.TEXT_COLOR}`}>
         <div className={`max-w-fit m-4 float-right`}>
           <LocaleSwitcher locale={locale} />
         </div>

@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import Link from 'next-intl/link';
+import { LINK_CLASSES } from "../utils/constants";
 
 const menuItems = ['story', 'wedding', 'travel', 'rsvp', 'contact'];
 
@@ -11,7 +12,7 @@ export default function Nav() {
       {menuItems.reduce((acc, link, index) => (
         <>
           {index === 0 ? null : <>{acc} &#8226; </> }
-          <Link className="text-slate-400 hover:underline" key={link} href={`#${link}`}>{t(`${link}.heading`)}</Link>
+          <Link className={LINK_CLASSES} key={link} href={`#${link}`}>{t(`${link}.heading`)}</Link>
         </>
       ), <></>)}
     </nav>

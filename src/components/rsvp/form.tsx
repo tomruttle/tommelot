@@ -4,7 +4,7 @@ import PersonForm from "./person-form";
 import { Radio } from "../form/radio";
 import Spacer from "../form/spacer";
 import Button from "../form/button";
-import { LINE_CLASSES } from "@/src/utils/constants";
+import { LINE_CLASSES, colors } from "@/src/utils/constants";
 
 export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventHandler<HTMLFormElement>, disableSubmit: boolean }) {
   const t = useTranslations('rsvp');
@@ -103,7 +103,7 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
             <div className="mb-4">
               <label htmlFor="diet">{t('diet')}</label>
               <Spacer />
-              <textarea className="form-input bg-black border-gray-200 focus:ring-0 focus:border-gray-300" id="diet" name="diet" />
+              <textarea className={`form-input bg-black ${colors.INPUT_BORDER_COLOR} focus:ring-0 ${colors.INPUT_FOCUS_BORDER_COLOR} w-full`} id="diet" name="diet" />
             </div>
 
             <Spacer />

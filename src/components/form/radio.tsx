@@ -1,6 +1,7 @@
 import { isString } from "@/src/utils/shared";
 import { ChangeEventHandler } from "react"
 import Spacer from "./spacer";
+import { colors } from "@/src/utils/constants";
 
 type Option = { id: string, value: string, text: string }
 
@@ -19,6 +20,7 @@ export function Radio({ label, options, currentValue, name, onChange }: { label?
 
           <input
             type="radio"
+            className={`form-radio focus:outline-none focus:ring-0 ${colors.RADIO_SELECT_COLOR} ${colors.BACKGROUND_COLOR} ${colors.INPUT_BORDER_COLOR} ${colors.INPUT_FOCUS_BORDER_COLOR}`}
             id={id}
             name={name}
             value={value}
