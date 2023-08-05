@@ -1,11 +1,12 @@
 'use client';
 
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 import { isString } from "@/src/utils/shared";
 import Form from "./form";
 import TP from "../atoms/tp";
 import TH3 from "../atoms/th3";
 import { useTranslations } from "next-intl";
+import TA from "../atoms/ta";
 
 export default function RsvpForm() {
   const t = useTranslations('rsvp');
@@ -13,6 +14,7 @@ export default function RsvpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAttending, setIsAttending] = useState<string | undefined>();
   const [submissionError, setSubmissionEror] = useState('');
+  const rsvpRef = useRef<HTMLHeadingElement | null>(null);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -39,15 +41,22 @@ export default function RsvpForm() {
     }
 
     setIsSubmitting(false);
+
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    rsvpRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
   };
 
   return (
     <>
-      <TH3 id="rsvp">RSVP</TH3>
+      <TH3 id="rsvp" refProps={rsvpRef}>RSVP</TH3>
 
       {isString(isAttending) ? <TP>{isAttending === 'yes' ? t('is-attending') : t('not-attending')}</TP> : (
         <>
-          {t.rich('intro', { TP: (chunks) => <TP>{chunks}</TP> })}
+          {t.rich('intro', {
+            TP: (chunks) => <TP>{chunks}</TP>,
+            hahaLink: (chunks) => <TA href="https://www.hallescheshaus.com">{chunks}</TA>
+          })}
           {isString(submissionError) ? <pre>{submissionError}</pre> : null}
           <Form onSubmit={onSubmit} disableSubmit={isSubmitting} />
         </>

@@ -111,7 +111,7 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
         ) : null}
 
         <div className="w-fit mx-auto">
-          <Button text={t('enter')} isDisabled={disableSubmit} />
+          <Button text={t('enter')} isDisabled={disableSubmit} isLoading={disableSubmit} />
         </div>
       </form>
     )
