@@ -11,11 +11,17 @@ export default function Input({
   focusColor = colors.INPUT_FOCUS_BORDER_COLOR,
   children
 }: { id: string, name: string, label?: string, type?: string, borderColor?: string, focusColor?: string, children?: React.ReactNode }) {
+  const input = <input className={`form-input ${colors.BACKGROUND_COLOR} ${borderColor} focus:ring-0 ${focusColor}`} id={id} name={name} type={type} required />;
+
+  if (!isString(label)) {
+    return <>{input}{children}</>;
+  }
+
   return (
     <div className="flex flex-wrap mb-4 min-w-fit">
-      {isString(label) ? <label className="min-w-fit" htmlFor={name}>{label}</label> : null}
+      <label className="min-w-fit" htmlFor={name}>{label}</label>
       <Spacer />
-      <input className={`form-input ${colors.BACKGROUND_COLOR} ${borderColor} focus:ring-0 ${focusColor}`} id={id} name={name} type={type} required />
+      {input}
       {children}
     </div>
   )

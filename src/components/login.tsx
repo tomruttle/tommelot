@@ -14,16 +14,17 @@ export default function Login({ searchState }: { searchState?: string }) {
   const inputFocusBorderColor = isIncorrectPassword ? colors.INPUT_ERROR_BORDER_COLOR : colors.INPUT_FOCUS_BORDER_COLOR
 
   return (
-    <form className="w-full max-w-sm" action="/api/login" method="post">
-      <div className="flex flex-wrap">
-        <Input {...{ id: 'password', name: 'password', type: 'password', borderColor: inputBorderColor, focusColor: inputFocusBorderColor }}>
-          {isIncorrectPassword ? (
-              <div className={`text-xs ${colors.ERROR_TEXT} py-1 px-4`}>{t('incorrect-password')}</div>
-            ) : null}
-        </Input>
-        
-        <Spacer />
+    <form className="w-full" action="/api/login" method="post">
+      <Input {...{ id: 'password', name: 'password', type: 'password', borderColor: inputBorderColor, focusColor: inputFocusBorderColor }}>
+        {isIncorrectPassword ? (
+          <div className={`text-xs ${colors.ERROR_TEXT} py-1 px-4`}>{t('incorrect-password')}</div>
+        ) : null}
+      </Input>
 
+      <Spacer />
+      <Spacer />
+
+      <div className="max-w-fit mx-auto">
         <Button text={t('login')} />
       </div>
     </form>

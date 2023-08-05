@@ -9,9 +9,10 @@ export default function LoginPage({ searchParams }: { searchParams: { [key: stri
   const searchState = isString(searchParams.state) ? searchParams.state : '';
 
   return (
-    <div className="h-full flex">
-      <div className="m-auto">
+    <div className="h-full flex justify-center items-center">
+      <div>
         <DiscoBall radius={100} tileSize={8} tileGap={2} />
+        <Spacer />
         <Spacer />
         <Login searchState={searchState} />
       </div>
