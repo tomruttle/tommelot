@@ -36,7 +36,7 @@ export default function RsvpForm() {
       setIsAttending(formData.get('attendance')?.toString());
     } catch (err) {
       if (err instanceof Error) {
-        setSubmissionEror(err.toString())
+        setSubmissionEror(t('error'))
       }
     }
 
@@ -49,7 +49,7 @@ export default function RsvpForm() {
 
   return (
     <>
-      <TH3 id="rsvp" refProps={rsvpRef}>RSVP</TH3>
+      <TH3 id="rsvp" refProps={rsvpRef}>{t('heading')}</TH3>
 
       {isString(isAttending) ? <TP>{isAttending === 'yes' ? t('is-attending') : t('not-attending')}</TP> : (
         <>

@@ -16,7 +16,6 @@ export default function Content() {
       <div className="mx-auto w-max">{t.rich('wedding.times')}</div>
 
       {t.rich('wedding.text', {
-        mcEmail: (chunks) => <TA href="mailto:mc@tommelot.com">{chunks}</TA>,
         hahaLink: (chunks) => <TA href="https://www.hallescheshaus.com">{chunks}</TA>
       })}
 
