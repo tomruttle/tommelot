@@ -52,17 +52,50 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
             {hasPlusOne === 'yes' ? (
               <>
                 {t('plus-one-details')}:
-                <div className="ml-12">
+                <div className="ml-12 my-6">
                   <PersonForm nameName="plus-one-name" phoneName="plus-one-phone" emailName="plus-one-email" />
+
+                  <Spacer />
+
+                  <Radio
+                    label={t('plus-one-eater')}
+                    name="plus-one-eater"
+                    options={[
+                      { id: 'plus-one-vegetarian', value: 'vegetarian', text: t('vegetarian') },
+                      { id: 'plus-one-vegan', value: 'vegan', text: t('vegan') },
+                      { id: 'plus-one-onmivore', value: 'omnivore', text: t('omnivore') },
+                    ]}
+                  />
                 </div>
               </>
             ) : (
               <>
-                <input type="hidden" id="plus-one-name" name="plus-one-name" />
-                <input type="hidden" id="plus-one-phone" name="plus-one-phone" />
-                <input type="hidden" id="plus-one-email" name="plus-one-email" />
+                <input type="hidden" id="plus-one-name" name="plus-one-name" value="-" />
+                <input type="hidden" id="plus-one-phone" name="plus-one-phone" value="-" />
+                <input type="hidden" id="plus-one-email" name="plus-one-email" value="-" />
+                <input type="hidden" id="plus-one-eater" name="plus-one-eater" value="-" />
               </>
             )}
+
+            <Spacer />
+
+            <Radio
+              label={t('eater')}
+              name="eater"
+              options={[
+                { id: 'vegetarian', value: 'vegetarian', text: t('vegetarian') },
+                { id: 'vegan', value: 'vegan', text: t('vegan') },
+                { id: 'onmivore', value: 'omnivore', text: t('omnivore') },
+              ]}
+            />
+
+            <Spacer />
+
+            <div className="mb-4">
+              <label htmlFor="diet">{t('diet')}</label>
+              <Spacer />
+              <textarea className={`form-input bg-black ${colors.INPUT_BORDER_COLOR} focus:ring-0 ${colors.INPUT_FOCUS_BORDER_COLOR} w-full`} id="diet" name="diet" />
+            </div>
 
             <Radio
               label={t('tour')}
@@ -85,26 +118,6 @@ export default function Form({ onSubmit, disableSubmit }: { onSubmit: FormEventH
                 { id: 'no-brunch', value: 'no', text: t('no') },
               ]}
             />
-
-            <Spacer />
-
-            <Radio
-              label={t('eater')}
-              name="eater"
-              options={[
-                { id: 'vegetarian', value: 'vegetarian', text: t('vegetarian') },
-                { id: 'vegan', value: 'vegan', text: t('vegan') },
-                { id: 'onmivore', value: 'omnivore', text: t('omnivore') },
-              ]}
-            />
-
-            <Spacer />
-
-            <div className="mb-4">
-              <label htmlFor="diet">{t('diet')}</label>
-              <Spacer />
-              <textarea className={`form-input bg-black ${colors.INPUT_BORDER_COLOR} focus:ring-0 ${colors.INPUT_FOCUS_BORDER_COLOR} w-full`} id="diet" name="diet" />
-            </div>
 
             <Spacer />
           </>
