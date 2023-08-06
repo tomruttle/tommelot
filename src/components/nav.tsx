@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import Link from 'next-intl/link';
 import { LINK_CLASSES } from "../utils/constants";
 
-const menuItems = ['story', 'wedding', 'travel', 'rsvp', 'contact'];
+const menuItems = ['story', 'wedding', 'rsvp', 'travel', 'contact'];
 
 export default function Nav() {
   const t = useTranslations();
