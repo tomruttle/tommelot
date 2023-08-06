@@ -23,6 +23,8 @@ export default function LocaleLayout({ children, params }: { children: React.Rea
         </div>
 
         <main className="clear-both min-h-screen mx-auto md:w-3/4 xl:w-1/2 px-8 sm:px-16 md:px-24 space-y-8 pb-16 overflow-x-scroll">{children}</main>
+      
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fd70b5b6dd5042f689d920914b3e2817"}'></script>
       </body>
     </html>
   );
